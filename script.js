@@ -126,7 +126,20 @@ const botonLargo = document.querySelector('.app__card-button--largo');
 const banner = document.querySelector('.app__image');
 const titulo = document.querySelector('.app__title');
 const botones = document.querySelectorAll('.app__card-button');
+const inputMusicaEnfoque = document.querySelector('#alternar-musica');
+const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 
+musica.loop = true;
+musica.volume = 0.5;
+
+inputMusicaEnfoque.addEventListener('change', () => {
+    if (musica.paused) {
+        musica.play();
+    }
+    else {
+        musica.pause();
+    }
+});
 
 botonEnfoque.addEventListener('click', () => {
     cambiarContexto('enfoque');
