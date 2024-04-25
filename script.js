@@ -127,8 +127,11 @@ const botonCorto = document.querySelector('.app__card-button--corto');
 const botonLargo = document.querySelector('.app__card-button--largo');
 const botones = document.querySelectorAll('.app__card-button');
 const inputMusicaEnfoque = document.querySelector('#alternar-musica');
-const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 const botonIniciarPausar = document.querySelector('#start-pause');
+const textoIniciarPausar = document.querySelector('#start-pause span');
+const iconoIniciarPausar = document.querySelector('.app__card-primary-butto-icon')
+
+const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 const audioPlay = new Audio('./sonidos/play.wav');
 const audioPausa = new Audio('./sonidos/pause.mp3');
 const audioTiempoFinalizado = new Audio('./sonidos/beep.mp3');
@@ -200,6 +203,8 @@ const cuentaRegresiva = () => {
         return;
 
     }
+    iconoIniciarPausar.setAttribute('src', `./imagenes/pause.png`);
+    textoIniciarPausar.textContent = "Pausar";
     tiempoTranscurridoEnSegundos -= 1;
     console.log("temporizador: " + tiempoTranscurridoEnSegundos);
 }
@@ -217,4 +222,7 @@ function iniciarPausar() {
 function reiniciar() {
     clearInterval(idIntervalo);
     idIntervalo = null;
+    iconoIniciarPausar.setAttribute('src', `./imagenes/play_arrow.png`);
+    botonIniciarPausar.textContent = "Comenzar";
+
 }
