@@ -129,14 +129,15 @@ const botones = document.querySelectorAll('.app__card-button');
 const inputMusicaEnfoque = document.querySelector('#alternar-musica');
 const botonIniciarPausar = document.querySelector('#start-pause');
 const textoIniciarPausar = document.querySelector('#start-pause span');
-const iconoIniciarPausar = document.querySelector('.app__card-primary-butto-icon')
+const iconoIniciarPausar = document.querySelector('.app__card-primary-butto-icon');
+const tiempoEnPantalla = document.querySelector('#timer');
 
 const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 const audioPlay = new Audio('./sonidos/play.wav');
 const audioPausa = new Audio('./sonidos/pause.mp3');
 const audioTiempoFinalizado = new Audio('./sonidos/beep.mp3');
 
-let tiempoTranscurridoEnSegundos = 5;
+let tiempoTranscurridoEnSegundos = 1500;
 let idIntervalo = null;
 
 musica.loop = true;
@@ -152,21 +153,25 @@ inputMusicaEnfoque.addEventListener('change', () => {
 });
 
 botonEnfoque.addEventListener('click', () => {
+    tiempoTranscurridoEnSegundos = 1500;
     cambiarContexto('enfoque');
     botonEnfoque.classList.add('active');
 });
 
 botonCorto.addEventListener('click', () => {
+    tiempoTranscurridoEnSegundos = 300;
     cambiarContexto('descanso-corto');
     botonCorto.classList.add('active');
 });
 
 botonLargo.addEventListener('click', () => {
+    tiempoTranscurridoEnSegundos = 900;
     cambiarContexto('descanso-largo');
     botonLargo.classList.add('active');
 });
 
 function cambiarContexto(contexto) {
+    mostrarTiempo();
     botones.forEach(function (contexto) {
         contexto.classList.remove('active');
     })
@@ -198,15 +203,15 @@ function cambiarContexto(contexto) {
 const cuentaRegresiva = () => {
     if (tiempoTranscurridoEnSegundos <= 0) {
         audioTiempoFinalizado.play();
-        reiniciar();
         alert("¡Finalizo el tiempo!");
+        reiniciar();
         return;
 
     }
     iconoIniciarPausar.setAttribute('src', `./imagenes/pause.png`);
     textoIniciarPausar.textContent = "Pausar";
     tiempoTranscurridoEnSegundos -= 1;
-    console.log("temporizador: " + tiempoTranscurridoEnSegundos);
+    mostrarTiempo()
 }
 botonIniciarPausar.addEventListener("click", iniciarPausar);
 
@@ -222,7 +227,14 @@ function iniciarPausar() {
 function reiniciar() {
     clearInterval(idIntervalo);
     idIntervalo = null;
-    iconoIniciarPausar.setAttribute('src', `./imagenes/play_arrow.png`);
+    iconoIniciarPausar.setAttribute('src', `https://raw.githubusercontent.com/ket-id/Fokus_One_G6/main/imagenes/play_arrow.png`);
     botonIniciarPausar.textContent = "Comenzar";
 
 }
+
+function mostrarTiempo() {
+    const tiempo = new Date(tiempoTranscurridoEnSegundos * 1000);
+    const tiempoFormateado = tiempo.toLocaleTimeString('es-AR', { minute: '2-digit', second: '2-digit' });
+    tiempoEnPantalla.innerHTML = `${tiempoFormateado}`;
+}
+mostrarTiempo()
