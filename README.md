@@ -8,7 +8,7 @@ Colocar imagen aqui
 
 ## :black_nib: Utilizacion.
 Para Utilizar este proyecto, Ingresa al siguiente enlace:</br>
-- `Link` : 
+- `Link` : https://ket-id.github.io/Fokus_One_G6/
 
 ## :star2: Caracteristicas:
 - `Desarrollo `: HTML5, CSS3 y JavaScript.
