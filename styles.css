@@ -47,7 +47,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: url("/imagenes/pattern.png");
+  background: url("https://raw.githubusercontent.com/ket-id/Fokus_One_G6/main/imagenes/pattern.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
